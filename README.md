@@ -25,6 +25,6 @@ Regal Equine Oasis is a web application designed to streamline the management of
 
 Don't.
 
-## License
+## Status
 
-This project is licensed under the GNU AGPLv3 License - see the [LICENSE.md](LICENSE.md) file for details.
+Working on it :)
