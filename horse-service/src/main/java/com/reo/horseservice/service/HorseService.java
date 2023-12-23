@@ -4,10 +4,15 @@ import com.reo.horseservice.dto.HorseRequest;
 import com.reo.horseservice.dto.HorseResponse;
 import com.reo.horseservice.exception.BreedDoesntExistException;
 import com.reo.horseservice.exception.HorseAlreadyExistsException;
+import com.reo.horseservice.exception.HorseDoesNotExistException;
 import com.reo.horseservice.model.Breed;
+import com.reo.horseservice.model.Favorite;
 import com.reo.horseservice.model.Horse;
+import com.reo.horseservice.model.Session;
 import com.reo.horseservice.repository.BreedRepository;
+import com.reo.horseservice.repository.FavoriteRepository;
 import com.reo.horseservice.repository.HorseRepository;
+import com.reo.horseservice.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +29,12 @@ public class HorseService {
 
     @Autowired
     private BreedRepository breedRepository;
+
+    @Autowired
+    private FavoriteRepository favoriteRepository;
+
+    @Autowired
+    private SessionRepository sessionRepository;
 
     public List<HorseResponse> getAllHorses() {
         List<Horse> horses = horseRepository.findAll();
@@ -77,5 +88,23 @@ public class HorseService {
         Breed breed = breedOptional.get();
         List<Horse> horses = horseRepository.findAllByBreed(breed);
         return horses.stream().map(this::mapToHorseResponse).toList();
+    }
+
+    public void deleteHorse(int idHorse) {
+        Optional<Horse> horseOptional = horseRepository.findById(idHorse);
+        if (horseOptional.isEmpty())
+            throw new HorseDoesNotExistException("Horse with id: '" + idHorse + "' does not wxist in the DB.", idHorse);
+
+        Horse horse = horseOptional.get();
+        List<Favorite> favorites = favoriteRepository.findAllByHorse(horse);
+        for (Favorite f: favorites) {
+            favoriteRepository.delete(f);
+        }
+        List<Session> sessions = sessionRepository.findAllByHorse(horse);
+        for (Session s: sessions) {
+            sessionRepository.delete(s);
+        }
+        horseRepository.delete(horse);
+        log.info("Horse with id: {} successfully deleted.", idHorse);
     }
 }

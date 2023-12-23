@@ -33,4 +33,10 @@ public class HorseController {
     public List<HorseResponse> findAllHorsesByBreed(@RequestParam int idBreed) {
         return horseService.findAllHorsesByBreed(idBreed);
     }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteHorse(@RequestParam int idHorse) {
+        horseService.deleteHorse(idHorse);
+    }
 }
