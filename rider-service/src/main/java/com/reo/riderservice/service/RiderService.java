@@ -36,15 +36,15 @@ public class RiderService {
                 .dateOfEnrollment(rider.getDateOfEnrollment())
                 .name(rider.getName())
                 .surname(rider.getSurname())
-                .favorites(rider.getFavorites())
+                .coachName(rider.getCoach().getName() + " " + rider.getCoach().getSurname())
                 .build();
     }
 
     public void addNewRider(RiderRequest riderRequest) {
-        Optional<Coach> defaultCoachOptional = coachRepository.findByNameAndSurname("None", "None");
+        Optional<Coach> defaultCoachOptional = coachRepository.findByNameAndSurname("Marina", "Bajic");
         Coach defaultCoach;
         if (defaultCoachOptional.isEmpty()) {
-            defaultCoach = Coach.builder().name("None").surname("None").build();
+            defaultCoach = Coach.builder().name("Marina").surname("Bajic").build();
             coachRepository.save(defaultCoach);
         }
         else

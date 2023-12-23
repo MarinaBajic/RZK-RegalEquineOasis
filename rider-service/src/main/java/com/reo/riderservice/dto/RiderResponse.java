@@ -23,5 +23,5 @@ public class RiderResponse {
     private Date dateOfEnrollment;
     private String name;
     private String surname;
-    private List<Favorite> favorites;
+    private String coachName;
 }
