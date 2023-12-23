@@ -42,8 +42,8 @@ public class SessionService {
                 .date(session.getDate())
                 .description(session.getDescription())
                 .time(session.getTime())
-                .horse(session.getHorse())
-                .rider(session.getRider())
+                .horseFullName(session.getHorse().getFullName())
+                .riderName(session.getRider().getName() + " " + session.getRider().getSurname())
                 .build();
     }
 

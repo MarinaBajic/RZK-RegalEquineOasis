@@ -22,6 +22,6 @@ public class SessionResponse {
     private Date date;
     private String description;
     private String time;
-    private Horse horse;
-    private Rider rider;
+    private String horseFullName;
+    private String riderName;
 }
