@@ -27,18 +27,4 @@ public class Coach {
 
     @OneToMany(mappedBy="coach")
     private List<Rider> riders;
-
-    public Rider addRider(Rider rider) {
-        getRiders().add(rider);
-        rider.setCoach(this);
-
-        return rider;
-    }
-
-    public Rider removeRider(Rider rider) {
-        getRiders().remove(rider);
-        rider.setCoach(null);
-
-        return rider;
-    }
 }

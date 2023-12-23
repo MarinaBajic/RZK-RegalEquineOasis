@@ -41,32 +41,4 @@ public class Horse {
 
     @OneToMany(mappedBy="horse")
     private List<Session> sessions;
-
-    public Favorite addFavorite(Favorite favorite) {
-        getFavorites().add(favorite);
-        favorite.setHorse(this);
-
-        return favorite;
-    }
-
-    public Favorite removeFavorite(Favorite favorite) {
-        getFavorites().remove(favorite);
-        favorite.setHorse(null);
-
-        return favorite;
-    }
-
-    public Session addSession(Session session) {
-        getSessions().add(session);
-        session.setHorse(this);
-
-        return session;
-    }
-
-    public Session removeSession(Session session) {
-        getSessions().remove(session);
-        session.setHorse(null);
-
-        return session;
-    }
 }

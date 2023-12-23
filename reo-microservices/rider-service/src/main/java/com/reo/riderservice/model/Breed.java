@@ -27,19 +27,4 @@ public class Breed {
     @OneToMany(mappedBy="breed")
     @JsonIgnore
     private List<Horse> horses;
-
-    public Horse addHorse(Horse horse) {
-        getHorses().add(horse);
-        horse.setBreed(this);
-
-        return horse;
-    }
-
-    public Horse removeHorse(Horse horse) {
-        getHorses().remove(horse);
-        horse.setBreed(null);
-
-        return horse;
-    }
-
 }
