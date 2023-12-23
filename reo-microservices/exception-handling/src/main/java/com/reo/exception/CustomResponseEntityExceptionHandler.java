@@ -1,4 +1,4 @@
-package com.reo.horseservice.exception;
+package com.reo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

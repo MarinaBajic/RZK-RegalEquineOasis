@@ -19,6 +19,7 @@
         <module>horse-service</module>
         <module>rider-service</module>
         <module>session-service</module>
+        <module>exception-handling</module>
     </modules>
 
     <properties>

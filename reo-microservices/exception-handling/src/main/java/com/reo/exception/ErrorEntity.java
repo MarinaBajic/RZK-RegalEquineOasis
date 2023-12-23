@@ -1,4 +1,4 @@
-package com.reo.horseservice.exception;
+package com.reo.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class EntityAlreadyExistsException extends RuntimeException {
+@AllArgsConstructor
+public class ErrorEntity {
     private String message;
     private int idEntity;
 }

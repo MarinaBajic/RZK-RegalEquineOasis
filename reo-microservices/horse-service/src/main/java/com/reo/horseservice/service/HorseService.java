@@ -1,9 +1,10 @@
 package com.reo.horseservice.service;
 
+import com.reo.exception.CustomResponseEntityExceptionHandler;
+import com.reo.exception.EntityAlreadyExistsException;
+import com.reo.exception.EntityDoesNotExistException;
 import com.reo.horseservice.dto.HorseRequest;
 import com.reo.horseservice.dto.HorseResponse;
-import com.reo.horseservice.exception.EntityAlreadyExistsException;
-import com.reo.horseservice.exception.EntityDoesNotExistException;
 import com.reo.horseservice.model.Breed;
 import com.reo.horseservice.model.Favorite;
 import com.reo.horseservice.model.Horse;
@@ -14,6 +15,8 @@ import com.reo.horseservice.repository.HorseRepository;
 import com.reo.horseservice.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +24,8 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@Configuration
+@Import({ CustomResponseEntityExceptionHandler.class })
 public class HorseService {
 
     @Autowired
@@ -92,7 +97,7 @@ public class HorseService {
     public void deleteHorse(int idHorse) {
         Optional<Horse> horseOptional = horseRepository.findById(idHorse);
         if (horseOptional.isEmpty())
-            throw new EntityDoesNotExistException("Horse with id: '" + idHorse + "' does not wxist in the DB.", idHorse);
+            throw new EntityDoesNotExistException("Horse with id: '" + idHorse + "' does not exist in the DB.", idHorse);
 
         Horse horse = horseOptional.get();
         List<Favorite> favorites = favoriteRepository.findAllByHorse(horse);
