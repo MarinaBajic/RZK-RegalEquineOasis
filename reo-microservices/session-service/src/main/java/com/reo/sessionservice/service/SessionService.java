@@ -1,9 +1,10 @@
 package com.reo.sessionservice.service;
 
+import com.reo.exception.CustomResponseEntityExceptionHandler;
+import com.reo.exception.EntityDoesNotExistException;
+import com.reo.exception.UnableToAddNewEntityException;
 import com.reo.sessionservice.dto.SessionRequest;
 import com.reo.sessionservice.dto.SessionResponse;
-import com.reo.sessionservice.exception.EntityDoesNotExistException;
-import com.reo.sessionservice.exception.UnableToAddNewEntityException;
 import com.reo.sessionservice.model.Horse;
 import com.reo.sessionservice.model.Rider;
 import com.reo.sessionservice.model.Session;
@@ -12,6 +13,8 @@ import com.reo.sessionservice.repository.RiderRepository;
 import com.reo.sessionservice.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@Configuration
+@Import({ CustomResponseEntityExceptionHandler.class })
 public class SessionService {
 
     @Autowired

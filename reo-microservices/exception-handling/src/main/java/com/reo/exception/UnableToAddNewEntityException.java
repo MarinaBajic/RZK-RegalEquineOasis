@@ -1,4 +1,4 @@
-package com.reo.sessionservice.exception;
+package com.reo.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
