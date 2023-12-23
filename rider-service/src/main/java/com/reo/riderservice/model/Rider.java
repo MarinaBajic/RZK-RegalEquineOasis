@@ -1,6 +1,7 @@
 package com.reo.riderservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Date;
@@ -28,8 +29,10 @@ public class Rider {
     @Temporal(TemporalType.DATE)
     private Date dateOfEnrollment;
 
+    @Size(min=1, message = "Name of rider is required!")
     private String name;
 
+    @Size(min=1, message = "Surname of rider is required!")
     private String surname;
 
     @OneToMany(mappedBy="rider")
