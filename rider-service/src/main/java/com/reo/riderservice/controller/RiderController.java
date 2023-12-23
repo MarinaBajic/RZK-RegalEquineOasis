@@ -1,13 +1,11 @@
 package com.reo.riderservice.controller;
 
+import com.reo.riderservice.dto.RiderRequest;
 import com.reo.riderservice.dto.RiderResponse;
 import com.reo.riderservice.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,11 @@ public class RiderController {
     @ResponseStatus(HttpStatus.OK)
     public List<RiderResponse> getAllRiders() {
         return riderService.getAllRiders();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addNewRider(@RequestBody RiderRequest riderRequest) {
+        riderService.addNewRider(riderRequest);
     }
 }

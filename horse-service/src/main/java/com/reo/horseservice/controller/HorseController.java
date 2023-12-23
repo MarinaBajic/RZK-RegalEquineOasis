@@ -24,8 +24,8 @@ public class HorseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNewHorse(@RequestBody HorseRequest horse) {
-        horseService.addNewHorse(horse);
+    public void addNewHorse(@RequestBody HorseRequest horseRequest) {
+        horseService.addNewHorse(horseRequest);
     }
 
     @GetMapping("/search")
