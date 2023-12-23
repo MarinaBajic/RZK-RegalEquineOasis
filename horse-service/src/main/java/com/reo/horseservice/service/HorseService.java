@@ -2,9 +2,8 @@ package com.reo.horseservice.service;
 
 import com.reo.horseservice.dto.HorseRequest;
 import com.reo.horseservice.dto.HorseResponse;
-import com.reo.horseservice.exception.BreedDoesntExistException;
-import com.reo.horseservice.exception.HorseAlreadyExistsException;
-import com.reo.horseservice.exception.HorseDoesNotExistException;
+import com.reo.horseservice.exception.EntityAlreadyExistsException;
+import com.reo.horseservice.exception.EntityDoesNotExistException;
 import com.reo.horseservice.model.Breed;
 import com.reo.horseservice.model.Favorite;
 import com.reo.horseservice.model.Horse;
@@ -48,14 +47,14 @@ public class HorseService {
                 .fullName(horse.getFullName())
                 .gender(horse.getGender())
                 .nickname(horse.getNickname())
-                .breed(horse.getBreed())
+                .breedName(horse.getBreed().getName())
                 .build();
     }
 
     public void addNewHorse(HorseRequest horseRequest) {
         Optional<Horse> horseExists = horseRepository.findByFullName(horseRequest.getFullName());
         if (horseExists.isPresent()) {
-            throw new HorseAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseExists.get().getIdHorse());
+            throw new EntityAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseExists.get().getIdHorse());
         }
 
         Optional<Breed> defaultBreedOptional = breedRepository.findByName("Other");
@@ -83,7 +82,7 @@ public class HorseService {
     public List<HorseResponse> findAllHorsesByBreed(int idBreed) {
         Optional<Breed> breedOptional = breedRepository.findById(idBreed);
         if (breedOptional.isEmpty())
-            throw new BreedDoesntExistException("Breed with id: '" + idBreed + "' does not exist.", idBreed);
+            throw new EntityDoesNotExistException("Breed with id: '" + idBreed + "' does not exist.", idBreed);
 
         Breed breed = breedOptional.get();
         List<Horse> horses = horseRepository.findAllByBreed(breed);
@@ -93,7 +92,7 @@ public class HorseService {
     public void deleteHorse(int idHorse) {
         Optional<Horse> horseOptional = horseRepository.findById(idHorse);
         if (horseOptional.isEmpty())
-            throw new HorseDoesNotExistException("Horse with id: '" + idHorse + "' does not wxist in the DB.", idHorse);
+            throw new EntityDoesNotExistException("Horse with id: '" + idHorse + "' does not wxist in the DB.", idHorse);
 
         Horse horse = horseOptional.get();
         List<Favorite> favorites = favoriteRepository.findAllByHorse(horse);

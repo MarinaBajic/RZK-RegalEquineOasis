@@ -18,5 +18,5 @@ public class HorseResponse {
     private String fullName;
     private String gender;
     private String nickname;
-    private Breed breed;
+    private String breedName;
 }

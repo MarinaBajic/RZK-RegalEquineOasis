@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HorseDoesNotExistException extends RuntimeException {
+public class EntityAlreadyExistsException extends RuntimeException {
     private String message;
-    private int idHorse;
+    private int idEntity;
 }
