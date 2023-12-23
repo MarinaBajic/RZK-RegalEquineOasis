@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/RZK-RegalEquineOasis.iml" filepath="$PROJECT_DIR$/.idea/RZK-RegalEquineOasis.iml" />
       <module fileurl="file://$PROJECT_DIR$/horse-service/horse-service.iml" filepath="$PROJECT_DIR$/horse-service/horse-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/rider-service/rider-service.iml" filepath="$PROJECT_DIR$/rider-service/rider-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/session-service/session-service.iml" filepath="$PROJECT_DIR$/session-service/session-service.iml" />
     </modules>
   </component>
 </project>

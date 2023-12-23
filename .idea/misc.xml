@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/horse-service/pom.xml" />
         <option value="$PROJECT_DIR$/rider-service/pom.xml" />
+        <option value="$PROJECT_DIR$/session-service/pom.xml" />
       </list>
     </option>
   </component>
