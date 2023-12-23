@@ -3,16 +3,14 @@ package com.reo.horseservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.util.Date;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,7 +36,6 @@ public class Horse {
     private String nickname;
 
     @OneToMany(mappedBy="horse")
-    @JsonIgnore
     private List<Favorite> favorites;
 
     @ManyToOne
@@ -46,7 +43,6 @@ public class Horse {
     private Breed breed;
 
     @OneToMany(mappedBy="horse")
-    @JsonIgnore
     private List<Session> sessions;
 
     public Favorite addFavorite(Favorite favorite) {
