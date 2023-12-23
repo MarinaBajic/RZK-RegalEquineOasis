@@ -27,4 +27,10 @@ public class HorseController {
     public void addNewHorse(@RequestBody HorseRequest horse) {
         horseService.addNewHorse(horse);
     }
+
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<HorseResponse> findAllHorsesByBreed(@RequestParam int idBreed) {
+        return horseService.findAllHorsesByBreed(idBreed);
+    }
 }

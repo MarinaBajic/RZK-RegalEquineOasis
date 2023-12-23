@@ -2,6 +2,7 @@ package com.reo.horseservice.service;
 
 import com.reo.horseservice.dto.HorseRequest;
 import com.reo.horseservice.dto.HorseResponse;
+import com.reo.horseservice.exception.BreedDoesntExistException;
 import com.reo.horseservice.exception.HorseAlreadyExistsException;
 import com.reo.horseservice.model.Breed;
 import com.reo.horseservice.model.Horse;
@@ -65,5 +66,16 @@ public class HorseService {
 
         horseRepository.save(horse);
         log.info("Horse with id: {} is saved.", horse.getIdHorse());
+    }
+
+
+    public List<HorseResponse> findAllHorsesByBreed(int idBreed) {
+        Optional<Breed> breedOptional = breedRepository.findById(idBreed);
+        if (breedOptional.isEmpty())
+            throw new BreedDoesntExistException("Breed with id: '" + idBreed + "' does not exist.", idBreed);
+
+        Breed breed = breedOptional.get();
+        List<Horse> horses = horseRepository.findAllByBreed(breed);
+        return horses.stream().map(this::mapToHorseResponse).toList();
     }
 }
