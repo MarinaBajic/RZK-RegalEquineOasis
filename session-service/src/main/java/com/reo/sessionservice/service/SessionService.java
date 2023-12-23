@@ -74,12 +74,13 @@ public class SessionService {
         log.info("Session with id: {} is saved", session.getIdSession());
     }
 
-    private boolean isHorseFree(Horse horse, Date date, String time) {
-        List<Session> sessions = sessionRepository.findAll();
-        for (Session s: sessions) {
-            if (s.getHorse().equals(horse) && s.getDate().equals(date) && s.getTime().equals(time))
-                return false;
-        }
-        return true;
+    public void deleteSession(int idSession) {
+        Optional<Session> sessionOptional = sessionRepository.findById(idSession);
+        if (sessionOptional.isEmpty())
+            throw new EntityDoesNotExistException("Session with id: " + idSession + " does not exist in the DB.", idSession);
+
+        Session session = sessionOptional.get();
+        sessionRepository.delete(session);
+        log.info("Session with id: {} successfully deleted.", idSession);
     }
 }

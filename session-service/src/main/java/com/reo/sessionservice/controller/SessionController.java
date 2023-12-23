@@ -27,4 +27,10 @@ public class SessionController {
     public void addNewSession(@RequestBody SessionRequest sessionRequest) {
         sessionService.addNewSession(sessionRequest);
     }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteSession(@RequestParam int idSession) {
+        sessionService.deleteSession(idSession);
+    }
 }
