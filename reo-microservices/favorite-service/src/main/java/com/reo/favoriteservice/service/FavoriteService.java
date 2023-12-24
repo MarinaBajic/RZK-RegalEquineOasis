@@ -71,4 +71,14 @@ public class FavoriteService {
         favoriteRepository.save(favorite);
         log.info("Favorite horse with id: {} is saved.", favorite.getIdFavorite());
     }
+
+    public void deleteFavorite(int idFavorite) {
+        Optional<Favorite> favoriteOptional = favoriteRepository.findById(idFavorite);
+        if (favoriteOptional.isEmpty())
+            throw new EntityDoesNotExistException("Favorite with id: " + idFavorite + " does not exist in the DB.", idFavorite);
+
+        Favorite favorite = favoriteOptional.get();
+        favoriteRepository.delete(favorite);
+        log.info("Favorite with id: {} successfully deleted.", idFavorite);
+    }
 }
