@@ -21,4 +21,10 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity<>(errorEntity, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UnableToAddNewEntityException.class)
+    public ResponseEntity<ErrorEntity> handleUnableToAddNewEntity(UnableToAddNewEntityException ex) {
+        ErrorEntity errorEntity = new ErrorEntity(ex.getMessage(), -1);
+        return new ResponseEntity<>(errorEntity, HttpStatus.BAD_REQUEST);
+    }
+
 }
