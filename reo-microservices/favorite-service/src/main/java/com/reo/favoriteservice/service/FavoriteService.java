@@ -3,6 +3,7 @@ package com.reo.favoriteservice.service;
 import com.reo.exception.CustomResponseEntityExceptionHandler;
 import com.reo.exception.EntityDoesNotExistException;
 import com.reo.exception.UnableToAddNewEntityException;
+import com.reo.favoriteservice.dto.FavoriteHorse;
 import com.reo.favoriteservice.dto.FavoriteRequest;
 import com.reo.favoriteservice.dto.FavoriteResponse;
 import com.reo.favoriteservice.model.Favorite;
@@ -45,6 +46,26 @@ public class FavoriteService {
                 .idFavorite(favorite.getIdFavorite())
                 .horseFullName(favorite.getHorse().getFullName())
                 .riderName(favorite.getRider().getName() + " " + favorite.getRider().getSurname())
+                .build();
+    }
+
+    public List<FavoriteHorse> getAllFavoriteHorsesForRider(int idRider) {
+        Optional<Rider> riderOptional = riderRepository.findById(idRider);
+        if (riderOptional.isEmpty())
+            throw new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider);
+
+        Rider rider = riderOptional.get();
+        List<Favorite> favorites = favoriteRepository.findAllByRider(rider);
+        return favorites.stream().map(this::mapToFavoriteHorse).toList();
+    }
+
+    private FavoriteHorse mapToFavoriteHorse(Favorite favorite) {
+        return FavoriteHorse.builder()
+                .horseFullName(favorite.getHorse().getFullName())
+                .horseNickname(favorite.getHorse().getNickname())
+                .horseGender(favorite.getHorse().getGender())
+                .horseDateOfBirth(favorite.getHorse().getDateOfBirth())
+                .idRider(favorite.getRider().getIdRider())
                 .build();
     }
 

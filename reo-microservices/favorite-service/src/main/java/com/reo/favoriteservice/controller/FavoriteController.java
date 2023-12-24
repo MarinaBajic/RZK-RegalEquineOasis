@@ -1,5 +1,6 @@
 package com.reo.favoriteservice.controller;
 
+import com.reo.favoriteservice.dto.FavoriteHorse;
 import com.reo.favoriteservice.dto.FavoriteRequest;
 import com.reo.favoriteservice.dto.FavoriteResponse;
 import com.reo.favoriteservice.service.FavoriteService;
@@ -20,6 +21,12 @@ public class FavoriteController {
     @ResponseStatus(HttpStatus.OK)
     public List<FavoriteResponse> getAllFavorites() {
         return favoriteService.getAllFavorites();
+    }
+
+    @GetMapping("/rider")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FavoriteHorse> getAllFavoriteHorsesForRider(@RequestParam int idRider) {
+        return favoriteService.getAllFavoriteHorsesForRider(idRider);
     }
 
     @PostMapping
