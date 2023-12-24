@@ -21,6 +21,7 @@
         <module>session-service</module>
         <module>exception-handling</module>
         <module>config-server</module>
+        <module>favorite-service</module>
     </modules>
 
     <properties>

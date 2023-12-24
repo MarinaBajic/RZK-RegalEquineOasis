@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="exception-handling" />
         <module name="config-server" />
+        <module name="favorite-service" />
         <module name="horse-service" />
         <module name="rider-service" />
         <module name="session-service" />
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-server" options="-parameters" />
       <module name="exception-handling" options="-parameters" />
+      <module name="favorite-service" options="-parameters" />
       <module name="horse-service" options="-parameters" />
       <module name="rider-service" options="-parameters" />
       <module name="session-service" options="-parameters" />
