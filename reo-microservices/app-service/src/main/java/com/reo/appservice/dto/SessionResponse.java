@@ -11,11 +11,11 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteHorse {
-    private int idHorse;
+public class SessionResponse {
+    private int idSession;
+    private Date date;
+    private String description;
+    private String time;
     private String horseFullName;
-    private String horseNickname;
-    private String horseGender;
-    private Date horseDateOfBirth;
-    private int idRider;
+    private String riderName;
 }

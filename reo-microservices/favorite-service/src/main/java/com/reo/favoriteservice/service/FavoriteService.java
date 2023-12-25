@@ -59,6 +59,7 @@ public class FavoriteService {
 
     private FavoriteHorse mapToFavoriteHorse(Favorite favorite) {
         return FavoriteHorse.builder()
+                .idHorse(favorite.getHorse().getIdHorse())
                 .horseFullName(favorite.getHorse().getFullName())
                 .horseNickname(favorite.getHorse().getNickname())
                 .horseGender(favorite.getHorse().getGender())

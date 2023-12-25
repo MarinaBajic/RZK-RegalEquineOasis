@@ -1,8 +1,6 @@
 package com.reo.appservice.controller;
 
-import com.reo.appservice.dto.FavoriteHorse;
-import com.reo.appservice.dto.FavoriteRequest;
-import com.reo.appservice.dto.HorseResponse;
+import com.reo.appservice.dto.*;
 import com.reo.appservice.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,4 +44,18 @@ public class AppController {
     public void removeFromFavorites(@RequestParam int idRider, @RequestParam int idHorse) {
         appService.removeFromFavorites(idRider, idHorse);
     }
+
+    @PostMapping("/session/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<SessionResponse> newSession(@RequestBody SessionRequest sessionRequest) {
+        return appService.newSession(sessionRequest);
+    }
+
+    @GetMapping("/session")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SessionResponse> showSessions(@RequestParam("id-rider") int idRider) {
+        return appService.showSessions(idRider);
+    }
+
+    // TODO rename all request params
 }

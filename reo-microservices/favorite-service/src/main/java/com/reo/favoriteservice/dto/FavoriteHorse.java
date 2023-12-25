@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FavoriteHorse {
+    private int idHorse;
     private String horseFullName;
     private String horseNickname;
     private String horseGender;
