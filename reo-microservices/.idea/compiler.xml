@@ -7,17 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="exception-handling" />
         <module name="config-server" />
         <module name="favorite-service" />
-        <module name="horse-service" />
         <module name="rider-service" />
+        <module name="exception-handling" />
+        <module name="horse-service" />
+        <module name="app-service" />
         <module name="session-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="app-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="exception-handling" options="-parameters" />
       <module name="favorite-service" options="-parameters" />

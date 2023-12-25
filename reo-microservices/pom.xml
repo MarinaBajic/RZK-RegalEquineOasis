@@ -22,6 +22,7 @@
         <module>exception-handling</module>
         <module>config-server</module>
         <module>favorite-service</module>
+        <module>app-service</module>
     </modules>
 
     <properties>
