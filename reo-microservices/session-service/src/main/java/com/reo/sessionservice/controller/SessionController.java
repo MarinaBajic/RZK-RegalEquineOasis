@@ -22,6 +22,8 @@ public class SessionController {
         return sessionService.getAllSessions();
     }
 
+    // TODO getAllSessionsForRider(), getAllSessionsForHorse()
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addNewSession(@RequestBody SessionRequest sessionRequest) {

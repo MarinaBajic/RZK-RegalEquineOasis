@@ -52,15 +52,11 @@ public class SessionService {
     }
 
     public void addNewSession(SessionRequest sessionRequest) {
-        Optional<Horse> horseExists = horseRepository.findById(sessionRequest.getIdHorse());
-        if (horseExists.isEmpty())
-            throw new EntityDoesNotExistException("Horse with id: " + sessionRequest.getIdHorse() + " does not exist in the DB.", sessionRequest.getIdHorse());
-        Horse horse = horseExists.get();
+        Horse horse = horseRepository.findById(sessionRequest.getIdHorse())
+                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: " + sessionRequest.getIdHorse() + " does not exist in the DB.", sessionRequest.getIdHorse()));
 
-        Optional<Rider> riderExists = riderRepository.findById(sessionRequest.getIdRider());
-        if (riderExists.isEmpty())
-            throw new EntityDoesNotExistException("Rider with id: " + sessionRequest.getIdRider() + " does not exist in the DB.", sessionRequest.getIdRider());
-        Rider rider = riderExists.get();
+        Rider rider = riderRepository.findById(sessionRequest.getIdRider())
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getIdRider() + " does not exist in the DB.", sessionRequest.getIdRider()));
 
         Optional<Session> horseTaken = sessionRepository.findByHorseAndDateAndTime(horse, sessionRequest.getDate(), sessionRequest.getTime());
         if (horseTaken.isPresent())
@@ -79,11 +75,9 @@ public class SessionService {
     }
 
     public void deleteSession(int idSession) {
-        Optional<Session> sessionOptional = sessionRepository.findById(idSession);
-        if (sessionOptional.isEmpty())
-            throw new EntityDoesNotExistException("Session with id: " + idSession + " does not exist in the DB.", idSession);
+        Session session = sessionRepository.findById(idSession)
+                .orElseThrow(() -> new EntityDoesNotExistException("Session with id: " + idSession + " does not exist in the DB.", idSession));
 
-        Session session = sessionOptional.get();
         sessionRepository.delete(session);
         log.info("Session with id: {} successfully deleted.", idSession);
     }

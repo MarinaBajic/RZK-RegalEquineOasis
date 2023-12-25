@@ -85,21 +85,17 @@ public class HorseService {
 
 
     public List<HorseResponse> findAllHorsesByBreed(int idBreed) {
-        Optional<Breed> breedOptional = breedRepository.findById(idBreed);
-        if (breedOptional.isEmpty())
-            throw new EntityDoesNotExistException("Breed with id: '" + idBreed + "' does not exist.", idBreed);
+        Breed breed = breedRepository.findById(idBreed)
+                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: '" + idBreed + "' does not exist.", idBreed));
 
-        Breed breed = breedOptional.get();
         List<Horse> horses = horseRepository.findAllByBreed(breed);
         return horses.stream().map(this::mapToHorseResponse).toList();
     }
 
     public void deleteHorse(int idHorse) {
-        Optional<Horse> horseOptional = horseRepository.findById(idHorse);
-        if (horseOptional.isEmpty())
-            throw new EntityDoesNotExistException("Horse with id: '" + idHorse + "' does not exist in the DB.", idHorse);
+        Horse horse = horseRepository.findById(idHorse)
+                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: '" + idHorse + "' does not exist in the DB.", idHorse));
 
-        Horse horse = horseOptional.get();
         List<Favorite> favorites = favoriteRepository.findAllByHorse(horse);
         for (Favorite f: favorites) {
             favoriteRepository.delete(f);

@@ -50,11 +50,9 @@ public class FavoriteService {
     }
 
     public List<FavoriteHorse> getAllFavoriteHorsesForRider(int idRider) {
-        Optional<Rider> riderOptional = riderRepository.findById(idRider);
-        if (riderOptional.isEmpty())
-            throw new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider);
+        Rider rider = riderRepository.findById(idRider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider));
 
-        Rider rider = riderOptional.get();
         List<Favorite> favorites = favoriteRepository.findAllByRider(rider);
         return favorites.stream().map(this::mapToFavoriteHorse).toList();
     }
@@ -70,15 +68,11 @@ public class FavoriteService {
     }
 
     public void addNewFavorite(FavoriteRequest favoriteRequest) {
-        Optional<Horse> horseExists = horseRepository.findById(favoriteRequest.getIdHorse());
-        if (horseExists.isEmpty())
-            throw new EntityDoesNotExistException("Horse with id: " + favoriteRequest.getIdHorse() + " does not exist in the DB.", favoriteRequest.getIdHorse());
-        Horse horse = horseExists.get();
+        Horse horse = horseRepository.findById(favoriteRequest.getIdHorse())
+                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: " + favoriteRequest.getIdHorse() + " does not exist in the DB.", favoriteRequest.getIdHorse()));
 
-        Optional<Rider> riderExists = riderRepository.findById(favoriteRequest.getIdRider());
-        if (riderExists.isEmpty())
-            throw new EntityDoesNotExistException("Rider with id: " + favoriteRequest.getIdRider() + " does not exist in the DB.", favoriteRequest.getIdRider());
-        Rider rider = riderExists.get();
+        Rider rider = riderRepository.findById(favoriteRequest.getIdRider())
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + favoriteRequest.getIdRider() + " does not exist in the DB.", favoriteRequest.getIdRider()));
 
         Optional<Favorite> alreadyIsFavorite = favoriteRepository.findByHorseAndRider(horse, rider);
         if (alreadyIsFavorite.isPresent())
@@ -94,11 +88,9 @@ public class FavoriteService {
     }
 
     public void deleteFavorite(int idFavorite) {
-        Optional<Favorite> favoriteOptional = favoriteRepository.findById(idFavorite);
-        if (favoriteOptional.isEmpty())
-            throw new EntityDoesNotExistException("Favorite with id: " + idFavorite + " does not exist in the DB.", idFavorite);
+        Favorite favorite = favoriteRepository.findById(idFavorite)
+                .orElseThrow(() -> new EntityDoesNotExistException("Favorite with id: " + idFavorite + " does not exist in the DB.", idFavorite));
 
-        Favorite favorite = favoriteOptional.get();
         favoriteRepository.delete(favorite);
         log.info("Favorite with id: {} successfully deleted.", idFavorite);
     }
