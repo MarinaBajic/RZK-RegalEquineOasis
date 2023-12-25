@@ -24,13 +24,13 @@ public class SessionController {
 
     @GetMapping("/rider")
     @ResponseStatus(HttpStatus.OK)
-    public List<SessionResponse> getAllSessionsForRider(@RequestParam int idRider) {
+    public List<SessionResponse> getAllSessionsForRider(@RequestParam("id-rider") int idRider) {
         return sessionService.getAllSessionsForRider(idRider);
     }
 
     @GetMapping("/horse")
     @ResponseStatus(HttpStatus.OK)
-    public List<SessionResponse> getAllSessionsForHorse(@RequestParam int idHorse) {
+    public List<SessionResponse> getAllSessionsForHorse(@RequestParam("id-rider") int idHorse) {
         return sessionService.getAllSessionsForHorse(idHorse);
     }
 
@@ -42,7 +42,7 @@ public class SessionController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteSession(@RequestParam int idSession) {
+    public void deleteSession(@RequestParam("id-session") int idSession) {
         sessionService.deleteSession(idSession);
     }
 }

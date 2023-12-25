@@ -25,7 +25,7 @@ public class FavoriteController {
 
     @GetMapping("/rider")
     @ResponseStatus(HttpStatus.OK)
-    public List<FavoriteHorse> getAllFavoriteHorsesForRider(@RequestParam int idRider) {
+    public List<FavoriteHorse> getAllFavoriteHorsesForRider(@RequestParam("id-rider") int idRider) {
         return favoriteService.getAllFavoriteHorsesForRider(idRider);
     }
 
@@ -37,7 +37,7 @@ public class FavoriteController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteFavorite(@RequestParam int idRider, @RequestParam int idHorse) {
+    public void deleteFavorite(@RequestParam("id-rider") int idRider, @RequestParam("id-horse") int idHorse) {
         favoriteService.deleteFavorite(idRider, idHorse);
     }
 }

@@ -23,13 +23,13 @@ public class AppController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseResponse> searchHorses(@RequestParam int idBreed) {
+    public List<HorseResponse> searchHorses(@RequestParam("id-breed") int idBreed) {
         return appService.searchHorses(idBreed);
     }
 
     @GetMapping("/favorite/rider")
     @ResponseStatus(HttpStatus.OK)
-    public List<FavoriteHorse> showFavoriteHorses(@RequestParam int idRider) {
+    public List<FavoriteHorse> showFavoriteHorses(@RequestParam("id-rider") int idRider) {
         return appService.showFavoriteHorses(idRider);
     }
 
@@ -41,7 +41,7 @@ public class AppController {
 
     @DeleteMapping("/favorite/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void removeFromFavorites(@RequestParam int idRider, @RequestParam int idHorse) {
+    public void removeFromFavorites(@RequestParam("id-rider") int idRider, @RequestParam("id-horse") int idHorse) {
         appService.removeFromFavorites(idRider, idHorse);
     }
 
@@ -56,6 +56,4 @@ public class AppController {
     public List<SessionResponse> showSessions(@RequestParam("id-rider") int idRider) {
         return appService.showSessions(idRider);
     }
-
-    // TODO rename all request params
 }

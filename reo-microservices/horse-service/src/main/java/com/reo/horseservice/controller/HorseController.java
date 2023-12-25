@@ -30,13 +30,13 @@ public class HorseController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseResponse> findAllHorsesByBreed(@RequestParam int idBreed) {
+    public List<HorseResponse> findAllHorsesByBreed(@RequestParam("id-breed") int idBreed) {
         return horseService.findAllHorsesByBreed(idBreed);
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteHorse(@RequestParam int idHorse) {
+    public void deleteHorse(@RequestParam("id-horse") int idHorse) {
         horseService.deleteHorse(idHorse);
     }
 }
