@@ -40,6 +40,22 @@ public class SessionService {
         return sessions.stream().map(this::mapToSessionResponse).toList();
     }
 
+    public List<SessionResponse> getAllSessionsForRider(int idRider) {
+        Rider rider = riderRepository.findById(idRider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider));
+
+        List<Session> sessions = sessionRepository.findAllByRider(rider);
+        return sessions.stream().map(this::mapToSessionResponse).toList();
+    }
+
+    public List<SessionResponse> getAllSessionsForHorse(int idHorse) {
+        Horse horse = horseRepository.findById(idHorse)
+                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: " + idHorse + " does not exist in the DB.", idHorse));
+
+        List<Session> sessions = sessionRepository.findAllByHorse(horse);
+        return sessions.stream().map(this::mapToSessionResponse).toList();
+    }
+
     private SessionResponse mapToSessionResponse(Session session) {
         return SessionResponse.builder()
                 .idSession(session.getIdSession())

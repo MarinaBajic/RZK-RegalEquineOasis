@@ -22,7 +22,17 @@ public class SessionController {
         return sessionService.getAllSessions();
     }
 
-    // TODO getAllSessionsForRider(), getAllSessionsForHorse()
+    @GetMapping("/rider")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SessionResponse> getAllSessionsForRider(@RequestParam int idRider) {
+        return sessionService.getAllSessionsForRider(idRider);
+    }
+
+    @GetMapping("/horse")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SessionResponse> getAllSessionsForHorse(@RequestParam int idHorse) {
+        return sessionService.getAllSessionsForHorse(idHorse);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
