@@ -87,11 +87,17 @@ public class FavoriteService {
         log.info("Favorite horse with id: {} is saved.", favorite.getIdFavorite());
     }
 
-    public void deleteFavorite(int idFavorite) {
-        Favorite favorite = favoriteRepository.findById(idFavorite)
-                .orElseThrow(() -> new EntityDoesNotExistException("Favorite with id: " + idFavorite + " does not exist in the DB.", idFavorite));
+    public void deleteFavorite(int idRider, int idHorse) {
+        Rider rider = riderRepository.findById(idRider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider));
+
+        Horse horse = horseRepository.findById(idHorse)
+                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: " + idHorse + " does not exist in the DB.", idHorse));
+
+        Favorite favorite = favoriteRepository.findByHorseAndRider(horse, rider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Favorite horse with id: " + idHorse + " for rider with id: " + idRider + " does not exist in the DB.", -1));
 
         favoriteRepository.delete(favorite);
-        log.info("Favorite with id: {} successfully deleted.", idFavorite);
+        log.info("Favorite with id: {} successfully deleted.", favorite.getIdFavorite());
     }
 }

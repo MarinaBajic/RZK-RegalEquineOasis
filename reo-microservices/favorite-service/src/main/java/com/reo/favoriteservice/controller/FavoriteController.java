@@ -37,7 +37,7 @@ public class FavoriteController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteFavorite(@RequestParam int idFavorite) {
-        favoriteService.deleteFavorite(idFavorite);
+    public void deleteFavorite(@RequestParam int idRider, @RequestParam int idHorse) {
+        favoriteService.deleteFavorite(idRider, idHorse);
     }
 }

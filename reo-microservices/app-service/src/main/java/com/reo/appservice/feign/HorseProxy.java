@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 @FeignClient(name="horse-service", url="localhost:8080")
-public interface FeignProxy {
+public interface HorseProxy {
 
     @GetMapping("/api/horse")
     List<HorseResponse> getAllHorses();

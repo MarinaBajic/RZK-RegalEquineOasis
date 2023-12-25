@@ -1,5 +1,7 @@
 package com.reo.appservice.controller;
 
+import com.reo.appservice.dto.FavoriteHorse;
+import com.reo.appservice.dto.FavoriteRequest;
 import com.reo.appservice.dto.HorseResponse;
 import com.reo.appservice.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,23 @@ public class AppController {
     @ResponseStatus(HttpStatus.OK)
     public List<HorseResponse> searchHorses(@RequestParam int idBreed) {
         return appService.searchHorses(idBreed);
+    }
+
+    @GetMapping("/favorite/rider")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FavoriteHorse> showFavoriteHorses(@RequestParam int idRider) {
+        return appService.showFavoriteHorses(idRider);
+    }
+
+    @PostMapping("/favorite")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addToFavorites(@RequestBody FavoriteRequest favoriteRequest) {
+        appService.addToFavorites(favoriteRequest);
+    }
+
+    @DeleteMapping("/favorite/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeFromFavorites(@RequestParam int idRider, @RequestParam int idHorse) {
+        appService.removeFromFavorites(idRider, idHorse);
     }
 }
