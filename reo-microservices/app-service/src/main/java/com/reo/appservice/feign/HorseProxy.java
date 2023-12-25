@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
-@FeignClient(name="horse-service", url="localhost:8080")
+@FeignClient(name="horse-service")
 public interface HorseProxy {
 
     @GetMapping("/api/horse")
@@ -17,5 +17,9 @@ public interface HorseProxy {
 
     @GetMapping("api/horse/search")
     @ResponseStatus(HttpStatus.OK)
-    List<HorseResponse> findAllHorsesByBreed(@RequestParam int idBreed);
+    List<HorseResponse> findAllHorsesByBreed(@RequestParam("id-breed") int idBreed);
+
+    @GetMapping("/api/horse/debug")
+    @ResponseStatus(HttpStatus.OK)
+    String debug();
 }

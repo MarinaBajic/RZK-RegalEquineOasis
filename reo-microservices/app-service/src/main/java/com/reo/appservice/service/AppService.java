@@ -57,4 +57,8 @@ public class AppService {
     public List<SessionResponse> showSessions(int idRider) {
         return sessionProxy.getAllSessionsForRider(idRider);
     }
+
+    public String debug() {
+        return horseProxy.debug();
+    }
 }

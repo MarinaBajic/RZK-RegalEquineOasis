@@ -56,4 +56,9 @@ public class AppController {
     public List<SessionResponse> showSessions(@RequestParam("id-rider") int idRider) {
         return appService.showSessions(idRider);
     }
+
+    @GetMapping("/debug")
+    public String debug() {
+        return appService.debug();
+    }
 }

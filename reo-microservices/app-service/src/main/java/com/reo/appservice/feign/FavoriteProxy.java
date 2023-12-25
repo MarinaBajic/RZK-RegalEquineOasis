@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name="favorite-service", url="localhost:8083")
+@FeignClient(name="favorite-service")
 public interface FavoriteProxy {
 
     @GetMapping("/api/favorite/rider")
-    List<FavoriteHorse> getAllFavoriteHorsesForRider(@RequestParam int idRider);
+    List<FavoriteHorse> getAllFavoriteHorsesForRider(@RequestParam("id-rider") int idRider);
 
     @PostMapping("/api/favorite")
     void addNewFavorite(@RequestBody FavoriteRequest favoriteRequest);
 
     @DeleteMapping("/api/favorite/delete")
-    void deleteFavorite(@RequestParam int idRider, @RequestParam int idHorse);
+    void deleteFavorite(@RequestParam("id-rider") int idRider, @RequestParam("id-horse") int idHorse);
 }

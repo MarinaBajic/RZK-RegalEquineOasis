@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "session-service", url = "localhost:8082")
+@FeignClient(name = "session-service")
 public interface SessionProxy {
 
     @PostMapping("/api/session")
     void addNewSession(@RequestBody SessionRequest sessionRequest);
 
     @GetMapping("/api/session/rider")
-    List<SessionResponse> getAllSessionsForRider(@RequestParam int idRider);
+    List<SessionResponse> getAllSessionsForRider(@RequestParam("id-rider") int idRider);
 }
