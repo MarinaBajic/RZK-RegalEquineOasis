@@ -12,8 +12,14 @@ public class ApiGatewayConfiguration {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p.path("/api/app/**").uri("lb://app-service"))
-                .route(p->p.path("/home")
-                        .filters(f->f.rewritePath("/home", "/api/app")).uri("lb://app-service"))
+                .route(p -> p.path("/")
+                        .filters(f -> f
+                                .rewritePath("/", "/api/app"))
+                        .uri("lb://app-service"))
+                .route(p -> p.path("/home/**")
+                        .filters(f -> f
+                                .rewritePath("/home", "/api/app"))
+                                .uri("lb://app-service"))
                 .build();
     }
 }
