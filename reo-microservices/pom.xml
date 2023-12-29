@@ -24,7 +24,9 @@
         <module>favorite-service</module>
         <module>app-service</module>
         <module>eureka-server</module>
-    </modules>
+		<module>api-gateway</module>
+		<module>api-gateway</module>
+	</modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

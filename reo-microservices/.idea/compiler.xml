@@ -11,6 +11,7 @@
         <module name="favorite-service" />
         <module name="rider-service" />
         <module name="exception-handling" />
+        <module name="api-gateway" />
         <module name="horse-service" />
         <module name="app-service" />
         <module name="eureka-server" />
@@ -20,6 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="app-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
