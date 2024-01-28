@@ -1,11 +1,10 @@
 package com.reo.favoriteservice.service;
 
-import com.reo.exception.CustomResponseEntityExceptionHandler;
-import com.reo.exception.EntityDoesNotExistException;
-import com.reo.exception.UnableToAddNewEntityException;
 import com.reo.favoriteservice.dto.FavoriteHorse;
 import com.reo.favoriteservice.dto.FavoriteRequest;
 import com.reo.favoriteservice.dto.FavoriteResponse;
+import com.reo.favoriteservice.exception.EntityDoesNotExistException;
+import com.reo.favoriteservice.exception.UnableToAddNewEntityException;
 import com.reo.favoriteservice.model.Favorite;
 import com.reo.favoriteservice.model.Horse;
 import com.reo.favoriteservice.model.Rider;
@@ -14,8 +13,6 @@ import com.reo.favoriteservice.repository.HorseRepository;
 import com.reo.favoriteservice.repository.RiderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +20,6 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@Configuration
-@Import({ CustomResponseEntityExceptionHandler.class })
 public class FavoriteService {
 
     @Autowired
