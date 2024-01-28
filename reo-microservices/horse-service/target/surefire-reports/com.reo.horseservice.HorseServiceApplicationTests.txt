@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.reo.horseservice.HorseServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.23 s -- in com.reo.horseservice.HorseServiceApplicationTests

@@ -1,0 +1,5 @@
+# Created at 2024-01-18T02:10:20.242
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Faks\4 godina\7 semestar\Razvoj zasnovan na komponentama\Projekat2\RZK-RegalEquineOasis\reo-microservices\horse-service\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

@@ -1,0 +1,66 @@
+version: '2.23.3'
+
+services:
+  config-server:
+    image: marinabajic/config-server:1.0
+    mem_limit: 700m
+    ports:
+      - "8888:8888"
+    networks:
+      - reo-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/reo
+
+  eureka-server:
+    image: marinabajic/eureka-server:1.0
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - reo-network
+
+  horse-service:
+    image: marinabajic/horse-service:1.0
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - reo-network
+    depends_on:
+      - config-server
+      - eureka-server
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/reo
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+  app-service:
+    image: marinabajic/app-service:1.0
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - reo-network
+    depends_on:
+      - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+  api-gateway:
+    image: marinabajic/api-gateway:1.0
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    depends_on:
+      - eureka-server
+      - app-service
+    networks:
+      - reo-network
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+networks:
+  reo-network:
