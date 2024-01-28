@@ -1,18 +1,6 @@
 version: '2.23.3'
 
 services:
-  config-server:
-    image: marinabajic/config-server:1.0
-    mem_limit: 700m
-    ports:
-      - "8888:8888"
-    networks:
-      - reo-network
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/reo
-
   eureka-server:
     image: marinabajic/eureka-server:1.0
     mem_limit: 700m
@@ -29,12 +17,14 @@ services:
     networks:
       - reo-network
     depends_on:
-      - config-server
       - eureka-server
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/reo
+      - spring.datasource.username=root
+      - spring.datasource.password=root
+      - spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
 
   app-service:
