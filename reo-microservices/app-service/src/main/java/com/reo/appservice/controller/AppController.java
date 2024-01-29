@@ -27,6 +27,12 @@ public class AppController {
         return appService.searchHorses(idBreed);
     }
 
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteHorse(@RequestParam("id-horse") int idHorse) {
+        appService.deleteHorse(idHorse);
+    }
+
     @GetMapping("/favorite/rider")
     @ResponseStatus(HttpStatus.OK)
     public List<FavoriteHorse> showFavoriteHorses(@RequestParam("id-rider") int idRider) {

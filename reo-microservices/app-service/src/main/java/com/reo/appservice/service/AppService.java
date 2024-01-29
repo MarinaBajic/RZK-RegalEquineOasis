@@ -29,6 +29,10 @@ public class AppService {
         return horseProxy.findAllHorsesByBreed(idBreed);
     }
 
+    public void deleteHorse(int idHorse) {
+        horseProxy.deleteHorse(idHorse);
+    }
+
     public List<FavoriteHorse> showFavoriteHorses(int idRider) {
         return favoriteProxy.getAllFavoriteHorsesForRider(idRider);
     }
