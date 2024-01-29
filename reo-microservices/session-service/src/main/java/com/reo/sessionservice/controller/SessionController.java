@@ -30,7 +30,7 @@ public class SessionController {
 
     @GetMapping("/horse")
     @ResponseStatus(HttpStatus.OK)
-    public List<SessionResponse> getAllSessionsForHorse(@RequestParam("id-rider") int idHorse) {
+    public List<SessionResponse> getAllSessionsForHorse(@RequestParam("id-horse") int idHorse) {
         return sessionService.getAllSessionsForHorse(idHorse);
     }
 

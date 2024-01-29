@@ -19,6 +19,11 @@ public class ApiGatewayConfiguration {
                         .filters(f -> f
                                 .rewritePath("/home", "/api/app"))
                                 .uri("lb://app-service"))
+                .route(p -> p.path("/api/app/**").uri("lb://app-service"))
+                .route(p -> p.path("/api/horse/**").uri("lb://horse-service"))
+                .route(p -> p.path("/api/rider/**").uri("lb://rider-service"))
+                .route(p -> p.path("/api/favorite/**").uri("lb://favorite-service"))
+                .route(p -> p.path("/api/session/**").uri("lb://session-service"))
                 .build();
     }
 }
